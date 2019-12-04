@@ -127,7 +127,7 @@ portScan(){
 }
 
 vulcheck(){
-    git clone 
+    python3 vul_check.py url_list
 }
 
 checkArgs $TARGET
