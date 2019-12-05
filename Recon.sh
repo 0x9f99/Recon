@@ -121,16 +121,15 @@ portScan(){
     echo -e "${RED}[*] http[s]-list${RESET}"
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-ports | tee url.tmp
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml tls-ports | awk '{print "https://"$1}'|tee -a url.tmp
-    cat url.tmp |sort|uniq >url_list
-    echo -e "${RED}[*] Service-names${RESET}"
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names
-    echo -e "${RED}[*] Product${RESET}"
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product
+    cat url.tmp |sort|uniq >url_list && rm -rf url.tmp
+    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > service-names
+    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > product
     python3 ./EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH
     php -S 172.96.190.73:80
 }
 
 vulcheck(){
+    echo -e "${RED}[*] Start Vul Checking.${RESET}"
     python3 vul_check.py url_list
 }
 
