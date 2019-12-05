@@ -1,4 +1,4 @@
-import shiro,weblogic
+from plugins import *
 import sys
 import threading
 
