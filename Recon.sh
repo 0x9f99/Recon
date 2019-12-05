@@ -95,6 +95,10 @@ installTools(){
         echo -e "${GREEN}[+] Installing nmap-parse-output.${RESET}"
         git clone https://github.com/ernw/nmap-parse-output
     fi
+    if [ ! -d "EyeWitness" ];then
+        echo -e "${GREEN}[+] Installing EyeWitness.${RESET}"
+        git clone https://github.com/FortyNorthSecurity/EyeWitness
+    fi
 
 }
 
