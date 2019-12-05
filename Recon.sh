@@ -1,7 +1,5 @@
 #!/bin/bash
 
-VERSION="1.0"
-
 TARGET="$1"
 
 WORKING_DIR="$(cd "$(dirname "$0")" ; pwd -P)"
