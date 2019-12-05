@@ -124,16 +124,18 @@ portScan(){
     cat url.tmp |sort|uniq >url_list && rm -rf url.tmp
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > service-names
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > product
-    python3 ./EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH
-    php -S 172.96.190.73:80
 }
 
 vulcheck(){
     echo -e "${RED}[*] Start Vul Checking.${RESET}"
     python3 vul_check.py url_list
+    echo -e "${RED}[*] Start EyeWitness.${RESET}"
+    python3 ./EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH
 }
 
 checkArgs $TARGET
 setupTools
 installTools
 portScan
+vulcheck
+php -S 172.96.190.73:80
