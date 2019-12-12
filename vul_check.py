@@ -19,11 +19,6 @@ for q in web_queue:
 
 
 shiro_check = shiro.Detect(alive_Web_queue,vul_list)
-weblogic_check = weblogic.Detect(alive_Web_queue,vul_list)
-shiro=threading.Thread(target=weblogic_check.run)
-weblogic=threading.Thread(target=weblogic_check.run)
+shiro=threading.Thread(target=shiro_check.run)
 
 shiro.start()
-weblogic.start()
-#shiro_check.run()
-#weblogic_check.run()
