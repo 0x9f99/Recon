@@ -17,8 +17,12 @@ with open(sys.argv[1], "r") as f:
 for q in web_queue:
     alive_Web_queue.put(q)
 
-
+    
 shiro_check = shiro.Detect(alive_Web_queue,vul_list)
 shiro=threading.Thread(target=shiro_check.run)
 
+weblogic_check = weblogic.Detect(alive_Web_queue,vul_list)
+weblogic=threading.Thread(target=weblogic_check.run)
+
 shiro.start()
+weblogic.start()
