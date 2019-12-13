@@ -111,7 +111,6 @@ portScan(){
     echo -e "${GREEN}[+] Running Nmap.${RESET}"
     sudo nmap -sVC -p $open_ports --open -v -Pn -n -T4 -iL $WORKING_DIR/nmap_targets.tmp -oX $NRESULTS_PATH/nmap.xml
     sudo rm $WORKING_DIR/nmap_targets.tmp
-    xsltproc -o $NRESULTS_PATH/nmap-native.html $NRESULTS_PATH/nmap.xml
     xsltproc -o $NRESULTS_PATH/nmap-bootstrap.html $WORKING_DIR/bootstrap-nmap.xsl $NRESULTS_PATH/nmap.xml
     echo -e "${RED}[*] Nmap Done! View the HTML reports at $NRESULTS_PATH${RESET}"
     echo -e "${RED}[*] Nmap-parse-output Done!${RESET}"
@@ -121,6 +120,7 @@ portScan(){
     cat url.tmp |sort|uniq >url_list && rm -rf url.tmp
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > service-names
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > product
+    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-title > http-title
 }
 
 vulcheck(){
