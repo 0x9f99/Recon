@@ -16,12 +16,12 @@ class Detect(threading.Thread):
             alive_web = self.alive_Web_queue.get()
             self.run_detect(alive_web)
 
-    def CVE_2019_2729(self,url):
+    def CVE_2019_2725(self,url):
         weblogic_url = url + '/_async/AsyncResponseService'
         try:
             res = requests.get(url=weblogic_url, headers=self.headers, allow_redirects=False, timeout=10)
             if 'AsyncResponseService home page' in res.text:
-                cprint('[CVE-2019-2719 {}'.format(url), 'red')
+                cprint('[CVE-2019-2725] {}'.format(url), 'red')
                 self.vul_list.append(['weblogic', url])
             else:
                 print('[-] {}'.format(url))
@@ -63,4 +63,4 @@ class Detect(threading.Thread):
             url = 'https://' + url
         else:
             url = url
-        self.CVE_2019_2729(url)
+        self.CVE_2019_2725(url)
