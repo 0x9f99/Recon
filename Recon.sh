@@ -93,7 +93,7 @@ installTools(){
     fi
     if [ ! -d "EyeWitness" ];then
         echo -e "${GREEN}[+] Installing EyeWitness.${RESET}"
-        git clone https://github.com/FortyNorthSecurity/EyeWitness && ./EyeWitness/setup/setup.sh
+        git clone https://github.com/FortyNorthSecurity/EyeWitness && sudo ./EyeWitness/setup/setup.sh
     fi
 
 }
