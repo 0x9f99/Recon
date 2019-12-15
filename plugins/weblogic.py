@@ -39,6 +39,18 @@ class Detect(threading.Thread):
                 print('[-] {}'.format(url))
         except Exception as e:
             pass
+     
+    def CVE_2019_2729(self,url):
+        weblogic_url = url + '/wls-wsat/CoordinatorPortType11'
+        try:
+            res = requests.get(url=weblogic_url, headers=self.headers, allow_redirects=False, timeout=10)
+            if 'CoordinatorPortType11?wsdl' in res.text:
+                cprint('[CVE-2019-2729] {}'.format(url), 'red')
+                self.vul_list.append(['weblogic', url])
+            else:
+                print('[-] {}'.format(url))
+        except Exception as e:
+            pass
 
     def run_detect(self, url):
         if not urlparse(url).scheme:
@@ -47,3 +59,4 @@ class Detect(threading.Thread):
             url = url
         self.CVE_2017_10271(url)
         self.CVE_2019_2725(url)
+        self.CVE_2019_2729(url)
