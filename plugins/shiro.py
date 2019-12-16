@@ -30,7 +30,7 @@ class Detect(threading.Thread):
             res = requests.get(url=url, headers=shiro_headers, allow_redirects=False, timeout=10)
             res_setcookies = res.headers['Set-Cookie']
             if 'rememberMe=deleteMe' in res_setcookies:
-                cprint('[+] {}'.format(url), 'blue')
+                cprint('[shiro] {}'.format(url), 'blue')
                 self.vul_list.append(['shiro', url])
                 #isShiroList.append(url)
             else:
