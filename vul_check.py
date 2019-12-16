@@ -24,5 +24,9 @@ shiro=threading.Thread(target=shiro_check.run)
 weblogic_check = weblogic.Detect(alive_Web_queue,vul_list)
 weblogic=threading.Thread(target=weblogic_check.run)
 
-shiro.start()
-weblogic.start()
+struts2_check = weblogic.Detect(alive_Web_queue,vul_list)
+struts2=threading.Thread(target=weblogic_check.run)
+
+#shiro.start()
+#weblogic.start()
+struts2.start()
