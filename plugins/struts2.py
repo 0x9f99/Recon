@@ -10,7 +10,8 @@ class Detect(threading.Thread):
         threading.Thread.__init__(self)
         self.alive_Web_queue = alive_Web_queue    # 存活web的队列
         self.vul_list = vul_list    # 存储漏洞的名字和url
-
+        self.struts2_patten = re.compile(r'''["']([\S]+?\.(action|do))''', re.IGNORECASE)
+        
     def run(self):
         while not self.alive_Web_queue.empty():
             alive_web = self.alive_Web_queue.get()
@@ -41,5 +42,5 @@ class Detect(threading.Thread):
                     print('[+2] {}'.format(struts2_url))
                 except Exception as e:
                     pass
-         except Exception as e:
-                    pass
+        except Exception as e:
+            pass
