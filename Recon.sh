@@ -39,6 +39,7 @@ setupTools(){
 
 
 installTools(){
+    
     LATEST_MASSCAN="1.0.6"
     if [ ! -x "$(command -v masscan)" ]; then
         echo -e "${GREEN}[+] Installing Masscan.${RESET}"
@@ -124,6 +125,7 @@ portScan(){
 }
 
 vulcheck(){
+    sudo pip install -r requrement.txt
     echo -e "${RED}[*] Start Vul Checking.${RESET}"
     python3 vul_check.py url_list
     echo -e "${RED}[*] Start EyeWitness.${RESET}"
@@ -135,4 +137,3 @@ setupTools
 installTools
 portScan
 vulcheck
-php -S 172.96.190.73:80
