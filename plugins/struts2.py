@@ -34,11 +34,13 @@ class Detect(threading.Thread):
             if '.action' in urlparse(redirect_url).path or '.do' in urlparse(redirect_url).path:
                 struts2_url = redirect_url
                 cprint('[struts2] {}'.format(struts2_url),'red')
+                self.vul_list.append(['struts2', struts2_url])
             elif '.action' in html_doc or '.do' in html_doc:
                 try:
                     action_do_link = re.search(self.struts2_patten, html_doc).group(1)
                     struts2_url = redirect_url + '/' + action_do_link
                     cprint('[struts2 in html] {}'.format(struts2_url),'red')
+                    self.vul_list.append(['struts2', struts2_url])
                 except Exception as e:
                     pass
         except Exception as e:
