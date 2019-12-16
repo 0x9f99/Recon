@@ -122,6 +122,8 @@ portScan(){
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > service-names
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > product
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-title > http-title
+    echo -e "${RED}[*] Print http-title${RESET}"
+    IFS_old=$IFS;IFS=$'\n';for line in  `cat http-title`;do echo -e $line;done;IFS=$IFS_old
 }
 
 vulcheck(){
