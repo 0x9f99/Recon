@@ -7,8 +7,8 @@ from urllib.parse import urlparse
 class Detect(threading.Thread):
     def __init__(self, alive_Web_queue, vul_list):
         threading.Thread.__init__(self)
-        self.alive_Web_queue = alive_Web_queue    # 存活web的队列
-        self.vul_list = vul_list    # 存储漏洞的名字和url
+        self.alive_Web_queue = alive_Web_queue
+        self.vul_list = vul_list
         self.struts2_patten = re.compile(r'''["']([\S]+?\.(action|do))''', re.IGNORECASE)
         
     def run(self):
@@ -16,7 +16,6 @@ class Detect(threading.Thread):
             alive_web = self.alive_Web_queue.get()
             self.run_detect(alive_web)
 
-    # 只需要修改下面的代码就行
     def run_detect(self, url):
         if not urlparse(url).scheme:
             url = 'https://' + url
@@ -38,7 +37,7 @@ class Detect(threading.Thread):
             elif '.action' in html_doc or '.do' in html_doc:
                 try:
                     action_do_link = re.search(self.struts2_patten, html_doc).group(1)
-                    struts2_url = redirect_url + '/' + action_do_link
+                    struts2_url = redirect_url + action_do_link
                     cprint('[struts2 in html] {}'.format(struts2_url),'red')
                     self.vul_list.append(['struts2', struts2_url])
                 except Exception as e:
