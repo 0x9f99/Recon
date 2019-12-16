@@ -7,8 +7,8 @@ class Detect(threading.Thread):
     def __init__(self, alive_Web_queue, vul_list):
         threading.Thread.__init__(self)
         self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'}
-        self.alive_Web_queue = alive_Web_queue      # 存活web的队列
-        self.vul_list = vul_list                    # 存储漏洞的名字和url
+        self.alive_Web_queue = alive_Web_queue
+        self.vul_list = vul_list
 
 
     def run(self):
@@ -57,6 +57,7 @@ class Detect(threading.Thread):
             url = 'https://' + url
         else:
             url = url
+            
         self.CVE_2017_10271(url)
         self.CVE_2019_2725(url)
         self.CVE_2019_2729(url)
