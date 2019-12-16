@@ -39,6 +39,7 @@ setupTools(){
 
 
 installTools(){
+    LATEST_MASSCAN="1.0.6"
     if [ ! -x "$(command -v masscan)" ]; then
         echo -e "${GREEN}[+] Installing Masscan.${RESET}"
         git clone https://github.com/robertdavidgraham/masscan
