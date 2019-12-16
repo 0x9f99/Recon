@@ -31,10 +31,10 @@ class Detect(threading.Thread):
             redirect_url = res.url
             # print('[redirect to] {}'.format(redirect_url))
             html_doc = res.text
-            if '.action' in urlparse(redirect_url).path:
+            if '.action' in urlparse(redirect_url).path or '.do' in urlparse(redirect_url).path:
                 struts2_url = redirect_url
                 cprint('[struts2] {}'.format(struts2_url),'red')
-            elif '.action' in html_doc:
+            elif '.action' in html_doc or '.do' in html_doc:
                 try:
                     action_do_link = re.search(self.struts2_patten, html_doc).group(1)
                     struts2_url = redirect_url + '/' + action_do_link
