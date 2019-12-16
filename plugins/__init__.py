@@ -1,2 +1,1 @@
-
-__all__ = ['shiro','weblogic']
+__all__ = ['shiro','weblogic','struts2']
