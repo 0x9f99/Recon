@@ -29,8 +29,6 @@ checkArgs(){
 setupTools(){
     echo -e "${GREEN}[+] Setting things up.${RESET}"
     sudo apt update -y
-    sudo apt upgrade -y
-    sudo apt clean
     sudo apt install -y gcc g++ make libpcap-dev xsltproc
     
     echo -e "${GREEN}[+] Creating results directory.${RESET}"
