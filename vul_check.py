@@ -21,7 +21,7 @@ for vulClass in [shiro,weblogic,struts2]:
             alive_Web_queue.put(_)
 
         threads = []
-        thread_num = 50
+        thread_num = 30
         for num in range(1, thread_num + 1):
             t = detect(alive_Web_queue, vul_list)
             threads.append(t)
