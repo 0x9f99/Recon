@@ -29,6 +29,9 @@ checkArgs(){
 setupTools(){
     echo -e "${GREEN}[+] Setting things up.${RESET}"
     sudo apt update -y
+    #sudo apt upgrade -y
+    #sudo apt autoremove -y
+    #sudo apt clean
     sudo apt install -y gcc g++ make libpcap-dev xsltproc
     
     echo -e "${GREEN}[+] Creating results directory.${RESET}"
@@ -132,11 +135,11 @@ portScan(){
 }
 
 vulCheck(){
-    sudo pip install -r requrement.txt
+    sudo pip install -r requrement.txt 
     echo -e "${GREEN}[+] Running vul_check.${RESET}"
-    python3 vul_check.py url_list
+    python3 vul_check.py url_list | tee  $NRESULTS_PATH/vul.txt
     echo -e "${GREEN}[+] Running Eyewitness.${RESET}"
-    sudo python3 ./EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH
+    sudo -i python3 $WORKING_DIR/EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH  --no-dns --ocr
 }
 
 checkArgs $TARGET
