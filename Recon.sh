@@ -89,11 +89,17 @@ installTools(){
             rm -rf nmap-$LATEST_NMAP*
         fi 
     fi
+    
     if [ ! -d "nmap-parse-output" ];then
+        echo -e "${BLUE}[-] Latest version of Nmap-parse-output already installed. Skipping...${RESET}"
+    else
         echo -e "${GREEN}[+] Installing nmap-parse-output.${RESET}"
         git clone https://github.com/ernw/nmap-parse-output
     fi
+    
     if [ ! -d "EyeWitness" ];then
+        echo -e "${BLUE}[-] Latest version of Eyewitness already installed. Skipping...${RESET}"
+    else
         echo -e "${GREEN}[+] Installing EyeWitness.${RESET}"
         git clone https://github.com/FortyNorthSecurity/EyeWitness && sudo ./EyeWitness/setup/setup.sh
     fi
@@ -115,15 +121,16 @@ portScan(){
     xsltproc -o $NRESULTS_PATH/nmap-bootstrap.html $WORKING_DIR/bootstrap-nmap.xsl $NRESULTS_PATH/nmap.xml
     echo -e "${RED}[*] Nmap Done! View the HTML reports at $NRESULTS_PATH${RESET}"
     echo -e "${RED}[*] Nmap-parse-output Done!${RESET}"
-    echo -e "${RED}[*] http[s]-list${RESET}"
+    
+    echo -e "${GREEN}[+] Running Nmap-parse-output.${RESET}"
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-ports | tee url.tmp
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml tls-ports | awk '{print "https://"$1}'|tee -a url.tmp
     cat url.tmp |sort|uniq >url_list && rm -rf url.tmp
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > service-names
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > product
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-title > http-title
-    echo -e "${RED}[*] Print http-title${RESET}"
-    IFS_old=$IFS;IFS=$'\n';for line in  `cat http-title`;do echo -e $line;done;IFS=$IFS_old
+    IFS_old=$IFS;IFS=$'\n'
+    for line in `./nmap-parse-output/nmap-parse-output nresults/nmap.xml http-title`;do echo -e $line;done | tee http-title
+    IFS=$IFS_old
 }
 
 vulcheck(){
