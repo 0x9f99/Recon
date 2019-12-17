@@ -90,14 +90,14 @@ installTools(){
         fi 
     fi
     
-    if [ ! -d "nmap-parse-output" ];then
+    if [ -d "nmap-parse-output" ];then
         echo -e "${BLUE}[-] Latest version of Nmap-parse-output already installed. Skipping...${RESET}"
     else
         echo -e "${GREEN}[+] Installing nmap-parse-output.${RESET}"
         git clone https://github.com/ernw/nmap-parse-output
     fi
     
-    if [ ! -d "EyeWitness" ];then
+    if [ -d "EyeWitness" ];then
         echo -e "${BLUE}[-] Latest version of Eyewitness already installed. Skipping...${RESET}"
     else
         echo -e "${GREEN}[+] Installing EyeWitness.${RESET}"
