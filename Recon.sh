@@ -2,9 +2,10 @@
 
 TARGET="$1"
 
+TIME=`date +"%Y%m%d%H%M"`
 WORKING_DIR="$(cd "$(dirname "$0")" ; pwd -P)"
-NRESULTS_PATH="$WORKING_DIR/nresults"
-ERESULTS_PATH="$WORKING_DIR/eresults"
+NRESULTS_PATH="$WORKING_DIR/$TIME/nresults"
+ERESULTS_PATH="$WORKING_DIR/$TIME/eresults"
 
 RED="\033[1;31m"
 GREEN="\033[1;32m"
