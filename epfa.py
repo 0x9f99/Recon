@@ -13,7 +13,7 @@ with open(sys.argv[1], "r") as f:
         web_queue.append(i.strip())
     f.close()
 
-for vulClass in [shiro,weblogic,struts2]:
+for vulClass in [shiro,weblogic,struts2,jboss]:
     detect = vulClass.Detect
     try:
         alive_Web_queue = Queue(-1)
