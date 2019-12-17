@@ -126,10 +126,10 @@ portScan(){
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-ports | tee url.tmp
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml tls-ports | awk '{print "https://"$1}'|tee -a url.tmp
     cat url.tmp |sort|uniq >url_list && rm -rf url.tmp
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > service-names
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > product
+    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > $NRESULTS_PATH/service-names.txt
+    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > $NRESULTS_PATH/product.txt
     IFS_old=$IFS;IFS=$'\n'
-    for line in `./nmap-parse-output/nmap-parse-output nresults/nmap.xml http-title`;do echo -e $line;done | tee http-title
+    for line in `./nmap-parse-output/nmap-parse-output nresults/nmap.xml http-title`;do echo -e $line;done | tee $NRESULTS_PATH/http-title.txt
     IFS=$IFS_old
 }
 
