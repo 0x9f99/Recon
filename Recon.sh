@@ -133,16 +133,16 @@ portScan(){
     IFS=$IFS_old
 }
 
-vulcheck(){
+vulCheck(){
     sudo pip install -r requrement.txt
     echo -e "${GREEN}[+] Running vul_check.${RESET}"
     python3 vul_check.py url_list
     echo -e "${GREEN}[+] Running Eyewitness.${RESET}"
-    python3 ./EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH
+    sudo python3 ./EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH
 }
 
 checkArgs $TARGET
 setupTools
 installTools
 portScan
-vulcheck
+vulCheck
