@@ -135,9 +135,9 @@ portScan(){
 
 vulcheck(){
     sudo pip install -r requrement.txt
-    echo -e "${RED}[*] Start Vul Checking.${RESET}"
+    echo -e "${GREEN}[+] Running vul_check.${RESET}"
     python3 vul_check.py url_list
-    echo -e "${RED}[*] Start EyeWitness.${RESET}"
+    echo -e "${GREEN}[+] Running Eyewitness.${RESET}"
     python3 ./EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH
 }
 
