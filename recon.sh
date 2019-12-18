@@ -106,6 +106,13 @@ installTools(){
         git clone https://github.com/FortyNorthSecurity/EyeWitness && sudo ./EyeWitness/setup/setup.sh
     fi
 
+    if [ -d "tomcat-weak-password-scanner" ];then
+        echo -e "${BLUE}[-] Latest version of tomcat-weak-password-scanner already installed. Skipping...${RESET}"
+    else
+        echo -e "${GREEN}[+] Installing tomcat-weak-password-scanner.${RESET}"
+        git clone https://github.com/magicming200/tomcat-weak-password-scanner
+    fi
+
 }
 
 portScan(){
@@ -125,26 +132,31 @@ portScan(){
     echo -e "${RED}[*] Nmap-parse-output Done!${RESET}"
     
     echo -e "${GREEN}[+] Running Nmap-parse-output.${RESET}"
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-ports | tee url.tmp
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml tls-ports | awk '{print "https://"$1}'|tee -a url.tmp
+    $WORKING_DIR/nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-ports | tee url.tmp
+    $WORKING_DIR/nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml tls-ports | awk '{print "https://"$1}'|tee -a url.tmp
     cat url.tmp |sort|uniq >url_list && rm -rf url.tmp
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > $NRESULTS_PATH/service-names.txt
-    nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > $NRESULTS_PATH/product.txt
+    $WORKING_DIR/nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > $NRESULTS_PATH/service-names.txt
+    $WORKING_DIR/nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > $NRESULTS_PATH/product.txt
     IFS_old=$IFS;IFS=$'\n'
-    for line in `./nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-title`;do echo -e $line;done | tee $NRESULTS_PATH/http-title.txt
+    for line in `$WORKING_DIR/nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-title`;do echo -e $line;done | tee $NRESULTS_PATH/http-title.txt
     IFS=$IFS_old
+    $WORKING_DIR/nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml search-product "Apache Tomcat" | awk -F : '{print $1}'>tomcat-weak-password-scanner/ip.txt
+    $WORKING_DIR/nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml search-product "Apache Tomcat" | awk -F : '{print $2}'>tomcat-weak-password-scanner/port.txt
+
 }
 
-vulCheck(){
-    sudo pip install -r requrement.txt 
-    echo -e "${GREEN}[+] Running vul_check.${RESET}"
-    python3 epfa.py url_list | tee  $NRESULTS_PATH/vul_result.txt
+vulScanner(){
+    sudo pip install -r requrement.txt     
+    echo -e "${GREEN}[+] Running vul_scanner.${RESET}"
+    python3 $WORKING_DIR/epfa.py url_list | tee  $NRESULTS_PATH/vul_result.txt
     echo -e "${GREEN}[+] Running Eyewitness.${RESET}"
     sudo -i python3 $WORKING_DIR/EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH  --no-dns --ocr
+    echo -e "${GREEN}[+] Running weak-password_scanner.${RESET}"
+    cd $WORKING_DIR/tomcat-weak-password-scanner/ && python koala_tomcat_cmd.py -h ip.txt -p port.txt && cd -
 }
 
 checkArgs $TARGET
 setupTools
 installTools
 portScan
-vulCheck
+vulScanner
