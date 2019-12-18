@@ -131,7 +131,7 @@ portScan(){
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml service-names > $NRESULTS_PATH/service-names.txt
     nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml product > $NRESULTS_PATH/product.txt
     IFS_old=$IFS;IFS=$'\n'
-    for line in `./nmap-parse-output/nmap-parse-output nresults/nmap.xml http-title`;do echo -e $line;done | tee $NRESULTS_PATH/http-title.txt
+    for line in `./nmap-parse-output/nmap-parse-output $NRESULTS_PATH/nmap.xml http-title`;do echo -e $line;done | tee $NRESULTS_PATH/http-title.txt
     IFS=$IFS_old
 }
 
