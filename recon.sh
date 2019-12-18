@@ -147,11 +147,11 @@ portScan(){
 
 vulScanner(){
     sudo pip install -r requrement.txt     
-    echo -e "${GREEN}[+] Running vul_scanner.${RESET}"
+    echo -e "${GREEN}[+] Running vul-scanner.${RESET}"
     python3 $WORKING_DIR/epfa.py url_list | tee  $NRESULTS_PATH/vul_result.txt
     echo -e "${GREEN}[+] Running Eyewitness.${RESET}"
     sudo -i python3 $WORKING_DIR/EyeWitness/EyeWitness.py -x $NRESULTS_PATH/nmap.xml --no-prompt -d $ERESULTS_PATH  --no-dns --ocr
-    echo -e "${GREEN}[+] Running weak-password_scanner.${RESET}"
+    echo -e "${GREEN}[+] Running weak-password-scanner.${RESET}"
     cd $WORKING_DIR/tomcat-weak-password-scanner/ && python koala_tomcat_cmd.py -h ip.txt -p port.txt && cd -
 }
 
