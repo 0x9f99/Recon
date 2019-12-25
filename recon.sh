@@ -117,7 +117,7 @@ installTools(){
 
 portScan(){
     echo -e "${GREEN}[+] Running Masscan.${RESET}"
-    sudo masscan -p 1-65535 --rate 30000 --wait 0 --open -iL $TARGET -oX $NRESULTS_PATH/masscan.xml
+    sudo masscan -p1-65535 --rate 30000 --open -iL $TARGET -oX $NRESULTS_PATH/masscan.xml
     sudo rm $WORKING_DIR/paused.conf
     xsltproc -o $NRESULTS_PATH/masscan.html $WORKING_DIR/bootstrap-masscan.xsl $RESULTS_PATH/masscan.xml
     open_ports=$(cat $NRESULTS_PATH/masscan.xml | grep portid | cut -d "\"" -f 10 | sort -n | uniq | paste -sd,)
