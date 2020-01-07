@@ -113,12 +113,17 @@ installTools(){
         git clone https://github.com/magicming200/tomcat-weak-password-scanner
     fi
     
-    #    if [ -e ~/go/bin/amass ]; then
+    #if [ -e ~/go/bin/amass ]; then
     #    echo -e "${BLUE}[-] Latest version of amass already installed. Skipping...${RESET}"
     #else 
     #    snap install amass
     #fi
-
+    
+    #if [ -e ~/go/bin/subfinder ]; then
+    #    echo -e "${BLUE}[-] Latest version of Subfinder already installed. Skipping...${RESET}"
+    #else 
+    #    go get -u github.com/subfinder/subfinder
+    #fi
 
 }
 
