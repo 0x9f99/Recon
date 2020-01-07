@@ -112,6 +112,13 @@ installTools(){
         echo -e "${GREEN}[+] Installing tomcat-weak-password-scanner.${RESET}"
         git clone https://github.com/magicming200/tomcat-weak-password-scanner
     fi
+    
+    #    if [ -e ~/go/bin/amass ]; then
+    #    echo -e "${BLUE}[-] Latest version of amass already installed. Skipping...${RESET}"
+    #else 
+    #    snap install amass
+    #fi
+
 
 }
 
