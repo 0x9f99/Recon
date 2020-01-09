@@ -23,9 +23,11 @@ checkArgs(){
         echo -e "\t${RED}[!] ERROR:${RESET} File is empty and/or does not exists!\n"
         echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain name\n"
         exit 1
+    elif [ ! -s "-d" ];then
+	    echo -e "${GREEN}[+] enumSubs.${RESET}"
+        enumSubs
     fi
 }
-
 
 setupTools(){
     echo -e "${GREEN}[+] Setting things up.${RESET}"
@@ -38,7 +40,6 @@ setupTools(){
     echo -e "${GREEN}[+] Creating results directory.${RESET}"
     mkdir -p $NRESULTS_PATH
 }
-
 
 installTools(){
     
@@ -147,6 +148,13 @@ installTools(){
         rm -rf subfinder-linux-amd64.tar
     fi
 
+}
+
+enumSubs(){
+    /usr/bin/subfinder -d $2 -v -o dns.tmp
+    /snap/bin/amass enum -d $2 > dns.tmp
+    cat dns.tmp |sort|uniq > dns.target 
+    for i in `cat dns.target`;do host $i|grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}";done |sort|uniq|grep -E -o "([0-9]{1,3}[\.]){3}"|uniq -c|awk '{if ($1>=3) print $2"0/24"}' >ip.txt
 }
 
 portScan(){
