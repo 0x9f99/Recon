@@ -33,7 +33,7 @@ setupTools(){
     #sudo apt upgrade -y
     #sudo apt autoremove -y
     #sudo apt clean
-    sudo apt install -y gcc g++ make libpcap-dev xsltproc
+    sudo apt install -y gcc g++ make libpcap-dev xsltproc snap
     
     echo -e "${GREEN}[+] Creating results directory.${RESET}"
     mkdir -p $NRESULTS_PATH
@@ -113,16 +113,18 @@ installTools(){
         git clone https://github.com/magicming200/tomcat-weak-password-scanner
     fi
     
-    #if [ -e ~/go/bin/amass ]; then
-    #    echo -e "${BLUE}[-] Latest version of amass already installed. Skipping...${RESET}"
-    #else 
-    #    snap install amass
-    #fi
+    if [ -e /snap/bin/amass ]; then
+        echo -e "${BLUE}[-] Latest version of amass already installed. Skipping...${RESET}"
+    else 
+        snap install amass
+    fi
     
-    #if [ -e ~/go/bin/subfinder ]; then
-    #    echo -e "${BLUE}[-] Latest version of Subfinder already installed. Skipping...${RESET}"
-    #else 
-    #    go get -u github.com/subfinder/subfinder
+    if [ -e /usr/bin/subfinder ]; then
+        echo -e "${BLUE}[-] Latest version of Subfinder already installed. Skipping...${RESET}"
+    else 
+        wget https://github.com/projectdiscovery/subfinder/releases/download/v2.2.4/subfinder-linux-amd64.tar
+        mv subfinder-linux-amd64 /usr/bin/subfinder
+        rm -rf subfinder-linux-amd64.tar
     #fi
 
 }
