@@ -19,13 +19,14 @@ checkArgs(){
         echo -e "\t${RED}[!] ERROR:${RESET} Invalid argument!\n"
         echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
         exit 1
+    elif [ ! -s "-d" ];then
+	    echo -e "${GREEN}[+] enumSubs.${RESET}"
+        enumSubs
+	exit 1
     elif [ ! -s $1 ]; then
         echo -e "\t${RED}[!] ERROR:${RESET} File is empty and/or does not exists!\n"
         echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
         exit 1
-    elif [ ! -s "-d" ];then
-	    echo -e "${GREEN}[+] enumSubs.${RESET}"
-        enumSubs
     fi
 }
 
