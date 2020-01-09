@@ -4,7 +4,7 @@
 
 ## 如何工作
 
-**还没画...**
+还没画...
 
 ## 使用方法
 
@@ -33,6 +33,7 @@ or
 ```
 php -S server:port //程序根目录下开启http服务
 ```
+```
 http://server:port/[random_name]/eresults/report.html
 http://server:port/[random_name]/nresults/nmap-bootstrap.html
 http://server:port/[random_name]/nresults/vul.txt
@@ -40,7 +41,7 @@ http://server:port/[random_name]/nresults/vul.txt
 http://server:port/[random_name]/nresults/http-title.txt
 http://server:port/[random_name]/nresults/product.txt
 http://server:port/[random_name]/nresults/service-names.txt
-
+```
 
 ## 注意事项
 - 不要在国内限制Masscan的机房使用，腾讯云/阿里云等。
