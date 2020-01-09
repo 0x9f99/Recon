@@ -21,6 +21,10 @@ checkArgs(){
         exit 1
     elif [ $1 != "ip.txt" ]; then
         EnumSubDomains
+    elif [ ! -s $1 ]; then
+        echo -e "\t${RED}[!] ERROR:${RESET} File is empty and/or does not exists!\n"
+        echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
+        exit 1
     fi
 }
 
