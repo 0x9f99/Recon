@@ -22,7 +22,7 @@ iod(){
     elif [ $1 == "ip.txt" ]; then 
         return 1 
     else
-	    EnumSubDomains $1
+	EnumSubDomains $1
     fi
 }
 
