@@ -153,6 +153,7 @@ EnumSubDomains(){
     echo -e "${GREEN}[+] Running Amass.${RESET}"
     /snap/bin/amass enum -d $1 > dns.tmp
     cat dns.tmp |sort|uniq > dns.target 
+    rm -rf dns.tmp
     for i in `cat dns.target`;do host $i|grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}";done |sort|uniq|grep -E -o "([0-9]{1,3}[\.]){3}"|uniq -c|awk '{if ($1>=3) print $2"0/24"}' >ip.txt
 }
 
