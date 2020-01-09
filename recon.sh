@@ -17,14 +17,15 @@ RESET="\033[0m"
 checkArgs(){
     if [[ $# -eq 0 ]]; then
         echo -e "\t${RED}[!] ERROR:${RESET} Invalid argument!\n"
-        echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 -d domain.com\n"
+        echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
         exit 1
-    elif [ $1 == "-d" ];then
-	    echo -e "${GREEN}[+] EnumSubDomains.${RESET}"
-        enumSubs
+    elif [ $1 != "ip.txt" ]; then
+        echo -e "\t${RED}[!] ERROR:${RESET} Invalid argument!\n"
+        echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
+        exit 1
     elif [ ! -s $1 ]; then
         echo -e "\t${RED}[!] ERROR:${RESET} Invalid argument!\n"
-        echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 -d domain.com\n"
+        echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
         exit 1
     fi
 }
@@ -150,7 +151,7 @@ installTools(){
 
 }
 
-enumSubs(){
+enumSubs(domain){
     /usr/bin/subfinder -d $2 -v -o dns.tmp
     /snap/bin/amass enum -d $2 > dns.tmp
     cat dns.tmp |sort|uniq > dns.target 
