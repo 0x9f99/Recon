@@ -20,7 +20,7 @@ checkArgs(){
         echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 -d domain.com\n"
         exit 1
     elif [ $1 == "-d" ];then
-	    echo -e "${GREEN}[+] enumSubs.${RESET}"
+	    echo -e "${GREEN}[+] EnumSubDomains.${RESET}"
         enumSubs
     elif [ ! -s $1 ]; then
         echo -e "\t${RED}[!] ERROR:${RESET} Invalid argument!\n"
