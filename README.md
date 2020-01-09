@@ -8,6 +8,11 @@
 
 ## 使用方法
 
+使用ip.txt文件名
+IP地址段：x.x.x.x-x.x.x.x
+or
+CIDR：x.x.x.x/24
+
 ```
 echo ip > ip.txt
 chmod +x ./recon.sh
@@ -16,6 +21,7 @@ chmod +x ./recon.sh
 
 or
 
+使用有效域名
 ```
 ./recon.sh domain.com
 ```
