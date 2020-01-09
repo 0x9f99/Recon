@@ -14,17 +14,15 @@ YELLOW="\033[1;33m"
 RESET="\033[0m"
 
 
-checkArgs(){
+iod(){
     if [[ $# -eq 0 ]]; then
         echo -e "\t${RED}[!] ERROR:${RESET} Invalid argument!\n"
         echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
         exit 1
-    elif [ ! -s $1 ]; then
-        echo -e "\t${RED}[!] ERROR:${RESET} File is empty and/or does not exists!\n"
-        echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
-        exit 1
-    elif [ $1 != "ip.txt" ];then
-        EnumSubDomains $1
+    elif [ $1 == "ip.txt" ]; then 
+        return 1 
+    else
+	    EnumSubDomains $1
     fi
 }
 
@@ -196,7 +194,7 @@ vulScanner(){
     cd $WORKING_DIR/tomcat-weak-password-scanner/ && python koala_tomcat_cmd.py -h ip.txt -p port.txt && cd -
 }
 
-checkArgs $TARGET
+iod $TARGET
 setupTools
 installTools
 portScan
