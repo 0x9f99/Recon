@@ -19,9 +19,7 @@ checkArgs(){
         echo -e "\t${RED}[!] ERROR:${RESET} Invalid argument!\n"
         echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
         exit 1
-    elif [ $1 != "ip.txt" ]; then
-        EnumSubDomains $1
-    elif [ ! -s $1 ]; then
+    elif [ $1 != "ip.txt" && ! -s $1 ]; then
         echo -e "\t${RED}[!] ERROR:${RESET} File is empty and/or does not exists!\n"
         echo -e "\t${GREEN}[+] USAGE:${RESET}$0 ip.txt or $0 domain.com\n"
         exit 1
@@ -158,7 +156,7 @@ EnumSubDomains(){
 
 portScan(){
     echo -e "${GREEN}[+] Running Masscan.${RESET}"
-    sudo masscan -p1-65535 --rate 30000 --open -iL $TARGET -oX $NRESULTS_PATH/masscan.xml
+    sudo masscan -p1-65535 --rate 30000 --open -iL ip.txt -oX $NRESULTS_PATH/masscan.xml
     sudo rm $WORKING_DIR/paused.conf
     xsltproc -o $NRESULTS_PATH/masscan.html $WORKING_DIR/bootstrap-masscan.xsl $RESULTS_PATH/masscan.xml
     open_ports=$(cat $NRESULTS_PATH/masscan.xml | grep portid | cut -d "\"" -f 10 | sort -n | uniq | paste -sd,)
@@ -197,6 +195,7 @@ vulScanner(){
 }
 
 checkArgs $TARGET
+EnumSubDomains
 setupTools
 installTools
 portScan
