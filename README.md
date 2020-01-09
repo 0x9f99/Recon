@@ -1,7 +1,13 @@
-echo ip > ip.txt;
-chmod +x ./recon.sh;
-./recon.sh ip.txt;
+# 使用方法
+
+```
+echo ip > ip.txt
+chmod +x ./recon.sh
+./recon.sh ip.txt
+```
 
 or
 
+```
 ./recon.sh domain.com
+```
