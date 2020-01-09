@@ -121,6 +121,18 @@ installTools(){
         git clone https://github.com/magicming200/tomcat-weak-password-scanner
     fi
     
+    if [ -e /usr/local/go/bin/go ]; then
+        echo -e "${BLUE}[-] Latest version of golang-go already installed. Skipping...${RESET}"
+    else 
+        echo -e "${GREEN}[+] Installing the latest version of Go...${RESET}"
+        LATEST_GO=$(wget -qO- https://golang.org/dl/ | grep -oP 'go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2)
+        wget https://dl.google.com/go/go$LATEST_GO.linux-amd64.tar.gz
+        sudo tar -C /usr/local -xzf go$LATEST_GO.linux-amd64.tar.gz
+        echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+        source ~/.profile
+        rm -rf go$LATEST_GO*
+    fi
+    
     if [ -e /snap/bin/amass ]; then
         echo -e "${BLUE}[-] Latest version of amass already installed. Skipping...${RESET}"
     else 
@@ -133,7 +145,7 @@ installTools(){
         wget https://github.com/projectdiscovery/subfinder/releases/download/v2.2.4/subfinder-linux-amd64.tar
         mv subfinder-linux-amd64 /usr/bin/subfinder
         rm -rf subfinder-linux-amd64.tar
-    #fi
+    fi
 
 }
 
