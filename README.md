@@ -27,5 +27,20 @@ or
 ./recon.sh domain.com
 ```
 
+### 扫描结果
+
+**程序运行结束会生成新的目录，eresults子目录保存的是Eyewitness扫描结果，nresults子目录保存的是nmap相关结果和漏洞检测结果**
+```
+php -S server:port //程序根目录下开启http服务
+```
+http://server:port/[random_name]/eresults/report.html
+http://server:port/[random_name]/nresults/nmap-bootstrap.html
+http://server:port/[random_name]/nresults/vul.txt
+
+http://server:port/[random_name]/nresults/http-title.txt
+http://server:port/[random_name]/nresults/product.txt
+http://server:port/[random_name]/nresults/service-name.txt
+
+
 ## 注意事项
 - 不要在国内限制Masscan的机房使用，腾讯云/阿里云等。
