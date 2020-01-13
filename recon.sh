@@ -126,7 +126,11 @@ installTools(){
         source ~/.profile
         rm -rf go$LATEST_GO*
     fi
-    
+
+}
+
+EnumSubDomains(){
+
     if [ -e /snap/bin/amass ]; then
         echo -e "${BLUE}[-] Latest version of amass already installed. Skipping...${RESET}"
     else 
@@ -141,10 +145,7 @@ installTools(){
         mv subfinder-linux-amd64 /usr/bin/subfinder
         rm -rf subfinder-linux-amd64.tar
     fi
-
-}
-
-EnumSubDomains(){
+    
     echo -e "${GREEN}[+] Running Subfinder.${RESET}"
     /usr/bin/subfinder -d $1 -v -o dns.tmp > /dev/null
     echo -e "${GREEN}[+] Running Amass.${RESET}"
