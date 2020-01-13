@@ -137,6 +137,7 @@ installTools(){
         echo -e "${BLUE}[-] Latest version of Subfinder already installed. Skipping...${RESET}"
     else 
         wget https://github.com/projectdiscovery/subfinder/releases/download/v2.2.4/subfinder-linux-amd64.tar
+	tar zxvf subfinder-linux-amd64.tar
         mv subfinder-linux-amd64 /usr/bin/subfinder
         rm -rf subfinder-linux-amd64.tar
     fi
