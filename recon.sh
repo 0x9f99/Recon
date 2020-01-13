@@ -129,8 +129,7 @@ installTools(){
 
 }
 
-EnumSubDomains(){
-
+installDNSTools(){
     if [ -e /snap/bin/amass ]; then
         echo -e "${BLUE}[-] Latest version of amass already installed. Skipping...${RESET}"
     else 
@@ -145,6 +144,11 @@ EnumSubDomains(){
         mv subfinder-linux-amd64 /usr/bin/subfinder
         rm -rf subfinder-linux-amd64.tar
     fi
+}
+
+EnumSubDomains(){
+
+    installDNSTools
     
     echo -e "${GREEN}[+] Running Subfinder.${RESET}"
     /usr/bin/subfinder -d $1 -v -o dns.tmp > /dev/null
