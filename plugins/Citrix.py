@@ -16,6 +16,7 @@ class Detect(threading.Thread):
             self.run_detect(alive_web)
 
     def run_detect(self, url):
+        url = url.strip("http://").strip("https://")
         try:
             r = requests.get("https://" + url + "/vpn/%2e%2e/vpns/cfg/smb.conf", timeout=10, verify=False)
             if ("[global]") and ("encrypt passwords") and ("name resolve order") in str(r.content):
