@@ -1,1 +1,1 @@
-__all__ = ['shiro','weblogic','struts2','jboss','Citrix']
+__all__ = ['shiro','weblogic','struts2','jboss','Citrix','thinkphp']
