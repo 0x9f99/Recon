@@ -105,7 +105,7 @@ installTools(){
         echo -e "${BLUE}[-] Latest version of Eyewitness already installed. Skipping...${RESET}"
     else
         echo -e "${GREEN}[+] Installing EyeWitness.${RESET}"
-        git clone https://github.com/FortyNorthSecurity/EyeWitness && sudo ./EyeWitness/setup/setup.sh
+        git clone https://github.com/FortyNorthSecurity/EyeWitness && sudo ./EyeWitness/Python/setup/setup.sh
     fi
 
     if [ -d "tomcat-weak-password-scanner" ];then
