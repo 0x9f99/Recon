@@ -24,7 +24,7 @@ class Detect(threading.Thread):
         shiro_headers = {'Cookie': 'rememberMe=1','User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'}
         
         try:
-            res = requests.get(url=url, headers=shiro_headers, allow_redirects=True, timeout=10,verify=False)
+            res = requests.get(url=url, headers=shiro_headers, allow_redirects=False, timeout=10,verify=False)
             res_setcookies = res.headers['Set-Cookie']
             if 'rememberMe=deleteMe' in res_setcookies:
                 cprint('[shiro] {}'.format(url), 'blue')
