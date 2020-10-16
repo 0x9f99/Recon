@@ -1,1 +1,16 @@
 termcolor
+POST /login HTTP/1.1
+Host: clouddrive-dr.huawei.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 62
+Origin: https://clouddrive-dr.huawei.com
+Connection: close
+Referer: https://clouddrive-dr.huawei.com/login?accountPublic=accountPublic
+Cookie: lang=zh; isPomp=true; isPomp1=true; hwsso_uniportal=; hwsso_login=; hwssot=CD-11-7A-7B-AA-C1-1D-E8-6F-A7-E9-E4-99-FE-D5-D4; hwssot3=27245716405342; login_logFlag=out; suid=B0-5A-7F-4A-94-E7-FF-10-F8-2E-80-0E-92-58-96-48; w3Token=B0-5A-7F-4A-94-E7-FF-10-5B-C2-40-E0-C4-0F-2A-49-2D-B2-E9-45-17-4C-F8-4F-9F-4E-B6-65-8B-F0-B3-4B; login_uid=; _sid_=C6-55-2E-00-BB-52-AA-7F-EC-EF-E5-94-BA-C2-68-47-DE-45-46-46-EA-36-B1-E3-D9-F0-3C-33-5E-F2-56-09-6E-00-66-09-DC-3C-51-3F; hwsso_am=77-22-F7-0E-84-9F-31-CD; login_sip=7E-1A-97-8E-3D-46-19-E3-36-7B-EB-94-78-CF-76-E5-31-DD-35-52-A5-7C-E0-59; login_sid=C6-55-2E-00-BB-52-AA-7F-EC-EF-E5-94-BA-C2-68-47-DE-45-46-46-EA-36-B1-E3-D9-F0-3C-33-5E-F2-56-09-6E-00-66-09-DC-3C-51-3F; LtpaToken=xsOHrCTLIAlUVP2XBzryGj7RmkqVXxsnzNMFLll+GTjD+xwvtyPv5sJONz4k9brer9xCLoL4Xdkr9tWP7I9SwuQdY3XpWxSwvlu4b3hdgN44bripPctg/Do3RpcVv2UmU0B9K6bny6XllRkkkFgmBZa1n5x2Rdy4huWy38/QEixxyeFhxyO64h0uXttziwyk9AjL+p+fNnCVbi77A2/PnEuY7zRL0teHV9Ie9P804Ze7m2j8uncXoBGjVvleM1L2liFHpARXpFBGqzjebupu0g5IqyO/sW7lE0Qlkvw+AAqMQrb2B1t1JzONEWCxtFZqoaOMRG8rJbALH1kxXiEZa+SmsYQJB35xpLeUNMk7EjVuBCghOJoGUQ==; JSESSIONID=D9F771186FB35E829DF70DAB1696D5E6; ihelp_portal_index_M003242=1617px_280px; orderField=modifiedAt; isDesc=true; newCircleTipsClicked=hadClicked; listViewType=list; uid=; logFlag=out; lastRecordHash=%23createFlow/1/0; lastRecordViewMode=createFlow; HW3MS_CONNECT_SESSION=f61imlabj9q2oimhcdjdf3drs7; initTreeWidth=200; isShowReadPolicy=false; oblang=zh-cn; WAPSESSIONID=3F55B9FB9BFF57E2E54B7AF34F4783DF8DFDE9D32B74F43A0C12264CB3697A01
+Upgrade-Insecure-Requests: 1
+
+username=lwx997460&password=nihao123%21&savedShrioStr=&lang=zh
